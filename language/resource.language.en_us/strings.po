@@ -850,3 +850,20 @@ msgstr ""
 #~ msgctxt "#31138"
 #~ msgid "Player process info"
 #~ msgstr "Player process info"
+
+# Estuary (roquira) additions
+msgctxt "#33000"
+msgid "Anime sources"
+msgstr ""
+
+msgctxt "#33001"
+msgid "Anime movies source name"
+msgstr ""
+
+msgctxt "#33002"
+msgid "Anime shows source name"
+msgstr ""
+
+msgctxt "#33003"
+msgid "Exclude anime from Movies and TV Shows"
+msgstr ""

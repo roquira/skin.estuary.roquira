@@ -37,6 +37,7 @@
 						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),musicsettings)">SettingsDialogMusicSettingsContent</include>
 						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),moviewidgets)">SettingsDialogMovieWidgetsContent</include>
 						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),tvshowwidgets)">SettingsDialogTVShowWidgetsContent</include>
+						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),animewidgets)">SettingsDialogAnimeWidgetsContent</include>
 						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),musicwidgets)">SettingsDialogMusicWidgetsContent</include>
 						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),musicvideowidgets)">SettingsDialogMusicVideoWidgetsContent</include>
 						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),tvwidgets)">SettingsDialogTVWidgetsContent</include>
@@ -285,6 +286,62 @@
 			<label>$LOCALIZE[31075]</label>
 			<onclick>Skin.ToggleSetting(home_no_movies_sets_widget)</onclick>
 			<selected>!Skin.HasSetting(home_no_movies_sets_widget)</selected>
+		</control>
+	</include>
+	<include name="SettingsDialogAnimeWidgetsContent">
+		<control type="radiobutton" id="22101">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[31148]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_categories_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_categories_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22102">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[31010]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_movies_inprogress_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_movies_inprogress_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22103">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[626]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_tvshows_inprogress_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_tvshows_inprogress_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22104">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[20386]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_movies_recentlyadded_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_movies_recentlyadded_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22105">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[20387]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_episodes_recentlyadded_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_episodes_recentlyadded_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22106">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[31007]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_movies_unwatched_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_movies_unwatched_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22107">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[31122]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_tvshows_unwatched_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_tvshows_unwatched_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22108">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[31006]</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_movies_random_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_movies_random_widget)</selected>
+		</control>
+		<control type="radiobutton" id="22109">
+			<include>DialogSettingButton</include>
+			<label>Random Anime Shows</label>
+			<onclick>Skin.ToggleSetting(home_no_anime_tvshows_random_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_anime_tvshows_random_widget)</selected>
 		</control>
 	</include>
 	<include name="SettingsDialogTVShowWidgetsContent">

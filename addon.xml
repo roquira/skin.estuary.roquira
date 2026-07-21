@@ -2,6 +2,7 @@
 <addon id="skin.estuary.roquira" version="4.1.0-roquira.1" name="Estuary (roquira)" provider-name="phil65, Ichabod Fletchman, roquira">
 	<requires>
 		<import addon="xbmc.gui" version="5.18.0"/>
+		<import addon="xbmc.python" version="3.0.0"/>
 	</requires>
 	<extension point="xbmc.gui.skin" debugging="false">
 		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
@@ -13,6 +14,13 @@
 		<res width="2338" height="1080" aspect="19.5:9" default="false" folder="xml" />
 		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
 	</extension>
+	<extension point="xbmc.python.pluginsource" library="plugin.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.python.script" library="default.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py" start="startup"/>
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
 		<summary lang="en_GB">Estuary with an Anime home category and other refinements.</summary>

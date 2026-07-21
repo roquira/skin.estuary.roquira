@@ -203,6 +203,32 @@
 					<label2>$VAR[TVShowOnClickActionLabel2Var]</label2>
 					<enable>!Skin.HasSetting(HomeMenuNoTVShowButton)</enable>
 				</control>
+<control type="radiobutton" id="628">
+	<label>Anime</label>
+	<include>DefaultSettingButton</include>
+	<selected>!Skin.HasSetting(HomeMenuNoAnimeButton)</selected>
+	<onclick>Skin.ToggleSetting(HomeMenuNoAnimeButton)</onclick>
+</control>
+<control type="button" id="6281">
+	<label>- $LOCALIZE[31040]</label>
+	<include>DefaultSettingButton</include>
+	<onclick>SetProperty(settingsdialog_header,$LOCALIZE[31040] - Anime,home)</onclick>
+	<onclick>SetProperty(settingsdialog_content,animewidgets,home)</onclick>
+	<onclick>ActivateWindow(1101)</onclick>
+	<enable>!Skin.HasSetting(HomeMenuNoAnimeButton)</enable>
+</control>
+<control type="button" id="6282">
+	<label>- Anime source settings</label>
+	<include>DefaultSettingButton</include>
+	<onclick>RunScript(special://skin/default.py,source_settings)</onclick>
+	<enable>!Skin.HasSetting(HomeMenuNoAnimeButton)</enable>
+</control>
+	<control type="button" id="6283">
+		<label>- Regenerate Anime filters</label>
+		<include>DefaultSettingButton</include>
+		<onclick>RunScript(special://skin/default.py)</onclick>
+		<enable>!Skin.HasSetting(HomeMenuNoAnimeButton)</enable>
+	</control>
 				<control type="radiobutton" id="613">
 					<label>$LOCALIZE[2]</label>
 					<include>DefaultSettingButton</include>
