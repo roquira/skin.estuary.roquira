@@ -135,25 +135,25 @@
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_inprogress_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://skin/playlists/inprogress_movies.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31010]"/>
+							<param name="widget_header" value="In Progress Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="25100"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_recentlyadded_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://skin/playlists/recent_unwatched_movies.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[20386]"/>
+							<param name="widget_header" value="Recently Added Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="25200"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_unwatched_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://skin/playlists/unwatched_movies.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31007]"/>
+							<param name="widget_header" value="Unwatched Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="25300"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_random_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://skin/playlists/random_movies.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31006]"/>
+							<param name="widget_header" value="Random Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="browse_mode" value="never"/>
 							<param name="list_id" value="25400"/>
@@ -168,7 +168,7 @@
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_sets_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="videodb://movies/sets/"/>
-							<param name="widget_header" value="$LOCALIZE[31075]"/>
+							<param name="widget_header" value="Movie Sets"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="25600"/>
@@ -184,25 +184,25 @@
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_inprogress_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_inprogress.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31010]"/>
+							<param name="widget_header" value="In Progress Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="5100"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_recentlyadded_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_recent.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[20386]"/>
+							<param name="widget_header" value="Recently Added Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="5200"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_unwatched_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_unwatched.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31007]"/>
+							<param name="widget_header" value="Unwatched Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="5300"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_random_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_random.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31006]"/>
+							<param name="widget_header" value="Random Movies"/>
 							<param name="widget_target" value="videos"/>
 							<param name="browse_mode" value="never"/>
 							<param name="list_id" value="5400"/>
@@ -217,7 +217,7 @@
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_sets_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_sets.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31075]"/>
+							<param name="widget_header" value="Movie Sets"/>
 							<param name="widget_target" value="videos"/>
 							<param name="sortby" value="random"/>
 							<param name="list_id" value="5600"/>
@@ -255,7 +255,7 @@
 							<param name="content_path" value="videodb://inprogresstvshows"/>
 							<param name="sortby" value="lastplayed"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[626]"/>
+							<param name="widget_header" value="In Progress TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="26100"/>
 							<param name="onclick_condition" value="true"/>
@@ -263,13 +263,13 @@
 						</include>
 						<include content="WidgetListEpisodes" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyaddedepisodes_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://skin/playlists/recent_unwatched_episodes.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[20387]"/>
+							<param name="widget_header" value="Recently Added Episodes"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="26200"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_unwatched_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://skin/playlists/unwatched_tvshows.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31122]"/>
+							<param name="widget_header" value="Unwatched TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="26300"/>
 							<param name="onclick_condition" value="true"/>
@@ -285,7 +285,7 @@
 						</include>
 						<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_studios_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="videodb://tvshows/studios/"/>
-							<param name="widget_header" value="$LOCALIZE[20388]"/>
+							<param name="widget_header" value="Studios"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="26500"/>
 							<param name="icon" value="$VAR[WidgetStudioIconVar]"/>
@@ -302,7 +302,7 @@
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_inprogress.xsp"/>
 							<param name="sortby" value="lastplayed"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[626]"/>
+							<param name="widget_header" value="In Progress TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6100"/>
 							<param name="onclick_condition" value="true"/>
@@ -310,13 +310,13 @@
 						</include>
 						<include content="WidgetListEpisodes" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyaddedepisodes_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_episodes_recent.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[20387]"/>
+							<param name="widget_header" value="Recently Added Episodes"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6200"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_unwatched_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_unwatched.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31122]"/>
+							<param name="widget_header" value="Unwatched TV Shows"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6300"/>
 							<param name="onclick_condition" value="true"/>
@@ -332,7 +332,7 @@
 						</include>
 						<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_studios_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_studios.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[20388]"/>
+							<param name="widget_header" value="Studios"/>
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6500"/>
 							<param name="icon" value="$VAR[WidgetStudioIconVar]"/>
@@ -366,7 +366,7 @@
 						</include>
 						<include content="WidgetListSquare" condition="Library.HasContent(music) + !Skin.HasSetting(home_no_music_recentlyplayedalbums_widget)">
 							<param name="content_path" value="musicdb://recentlyplayedalbums"/>
-							<param name="widget_header" value="$LOCALIZE[517]"/>
+							<param name="widget_header" value="Recently Played Albums"/>
 							<param name="widget_target" value="music"/>
 							<param name="list_id" value="7100"/>
 							<param name="fallback_icon" value="DefaultMusicAlbums.png"/>
@@ -375,7 +375,7 @@
 						</include>
 						<include content="WidgetListSquare" condition="Library.HasContent(music) + !Skin.HasSetting(home_no_music_recentalbums_widget)">
 							<param name="content_path" value="musicdb://recentlyaddedalbums/"/>
-							<param name="widget_header" value="$LOCALIZE[359]"/>
+							<param name="widget_header" value="Recently Added Albums"/>
 							<param name="widget_target" value="music"/>
 							<param name="list_id" value="7200"/>
 							<param name="fallback_icon" value="DefaultMusicAlbums.png"/>
@@ -384,7 +384,7 @@
 						</include>
 						<include content="WidgetListSquare" condition="Library.HasContent(music) + !Skin.HasSetting(home_no_music_randomalbums_widget)">
 							<param name="content_path" value="special://skin/playlists/random_albums.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31012]"/>
+							<param name="widget_header" value="Random Albums"/>
 							<param name="widget_target" value="music"/>
 							<param name="browse_mode" value="never"/>
 							<param name="list_id" value="7300"/>
@@ -394,7 +394,7 @@
 						</include>
 						<include content="WidgetListSquare" condition="Library.HasContent(music) + !Skin.HasSetting(home_no_music_randomartists_widget)">
 							<param name="content_path" value="special://skin/playlists/random_artists.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31013]"/>
+							<param name="widget_header" value="Random Artists"/>
 							<param name="widget_target" value="music"/>
 							<param name="browse_mode" value="never"/>
 							<param name="list_id" value="7400"/>
@@ -402,7 +402,7 @@
 						</include>
 						<include content="WidgetListSquare" condition="Library.HasContent(music) + !Skin.HasSetting(home_no_music_unplayedalbums_widget)">
 							<param name="content_path" value="special://skin/playlists/unplayed_albums.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31014]"/>
+							<param name="widget_header" value="Unplayed Albums"/>
 							<param name="widget_target" value="music"/>
 							<param name="list_id" value="7500"/>
 							<param name="fallback_icon" value="DefaultMusicAlbums.png"/>
@@ -411,7 +411,7 @@
 						</include>
 						<include content="WidgetListSquare" condition="Library.HasContent(music) + !Skin.HasSetting(home_no_music_mostplayedalbums_widget)">
 							<param name="content_path" value="special://skin/playlists/mostplayed_albums.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31011]"/>
+							<param name="widget_header" value="Most Played Albums"/>
 							<param name="widget_target" value="music"/>
 							<param name="list_id" value="7600"/>
 							<param name="fallback_icon" value="DefaultMusicAlbums.png"/>
@@ -571,7 +571,7 @@
 							<param name="content_path" value="pvr://channels/tv/*?view=lastplayed"/>
 							<param name="sortby" value="lastplayed"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[31016]"/>
+							<param name="widget_header" value="Recently Played Channels"/>
 							<param name="widget_target" value="tvchannels"/>
 							<param name="item_limit" value="15"/>
 							<param name="list_id" value="12200"/>
@@ -581,7 +581,7 @@
 							<param name="content_path" value="pvr://recordings/tv/active?view=flat"/>
 							<param name="sortby" value="date"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[31015]"/>
+							<param name="widget_header" value="Recent Recordings"/>
 							<param name="widget_target" value="tvrecordings"/>
 							<param name="item_limit" value="15"/>
 							<param name="list_id" value="12300"/>
@@ -601,7 +601,7 @@
 						</include>
 						<include content="WidgetListPVR" condition="System.HasPVRAddon + !Skin.HasSetting(home_no_tv_channelgroups_widget)">
 							<param name="content_path" value="pvr://channels/tv"/>
-							<param name="widget_header" value="$LOCALIZE[19173]"/>
+							<param name="widget_header" value="TV Channel Groups"/>
 							<param name="widget_target" value="tvguide"/>
 							<param name="list_id" value="12500"/>
 							<param name="item_treshold" value="1"/>
@@ -610,7 +610,7 @@
 							<param name="content_path" value="pvr://search/tv/savedsearches"/>
 							<param name="sortorder" value="descending"/>
 							<param name="sortby" value="date"/>
-							<param name="widget_header" value="$LOCALIZE[19337]"/>
+							<param name="widget_header" value="Saved Searches"/>
 							<param name="widget_target" value="tvsearch"/>
 							<param name="list_id" value="12600"/>
 						</include>
@@ -618,7 +618,7 @@
 							<param name="content_path" value="pvr://channels/tv/*?view=dateadded"/>
 							<param name="sortby" value="dateadded"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[855]"/>
+							<param name="widget_header" value="Recently Added Channels"/>
 							<param name="widget_target" value="tvchannels"/>
 							<param name="item_limit" value="15"/>
 							<param name="list_id" value="12700"/>
@@ -654,7 +654,7 @@
 							<param name="content_path" value="pvr://channels/radio/*?view=lastplayed"/>
 							<param name="sortby" value="lastplayed"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[31018]"/>
+							<param name="widget_header" value="Recently Played Channels"/>
 							<param name="widget_target" value="radiochannels"/>
 							<param name="item_limit" value="15"/>
 							<param name="list_id" value="13200"/>
@@ -664,7 +664,7 @@
 							<param name="content_path" value="pvr://recordings/radio/active?view=flat"/>
 							<param name="sortby" value="date"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[31015]"/>
+							<param name="widget_header" value="Recent Recordings"/>
 							<param name="widget_target" value="radiorecordings"/>
 							<param name="item_limit" value="15"/>
 							<param name="list_id" value="13300"/>
@@ -684,7 +684,7 @@
 						</include>
 						<include content="WidgetListPVR" condition="System.HasPVRAddon + !Skin.HasSetting(home_no_radio_channelgroups_widget)">
 							<param name="content_path" value="pvr://channels/radio"/>
-							<param name="widget_header" value="$LOCALIZE[19174]"/>
+							<param name="widget_header" value="Radio Channel Groups"/>
 							<param name="widget_target" value="radioguide"/>
 							<param name="list_id" value="13500"/>
 							<param name="item_treshold" value="1"/>
@@ -693,7 +693,7 @@
 							<param name="content_path" value="pvr://search/radio/savedsearches"/>
 							<param name="sortorder" value="descending"/>
 							<param name="sortby" value="date"/>
-							<param name="widget_header" value="$LOCALIZE[19337]"/>
+							<param name="widget_header" value="Saved Searches"/>
 							<param name="widget_target" value="radiosearch"/>
 							<param name="list_id" value="13600"/>
 						</include>
@@ -701,7 +701,7 @@
 							<param name="content_path" value="pvr://channels/radio/*?view=dateadded"/>
 							<param name="sortby" value="dateadded"/>
 							<param name="sortorder" value="descending"/>
-							<param name="widget_header" value="$LOCALIZE[855]"/>
+							<param name="widget_header" value="Recently Added Channels"/>
 							<param name="widget_target" value="radiochannels"/>
 							<param name="item_limit" value="15"/>
 							<param name="list_id" value="13700"/>
@@ -917,7 +917,7 @@
 						</include>
 						<include content="WidgetListEpisodes" condition="Library.HasContent(musicvideos) + !Skin.HasSetting(show_musicvideoposter) + !Skin.HasSetting(home_no_musicvideos_recentlyadded_widget)">
 							<param name="content_path" value="videodb://recentlyaddedmusicvideos/"/>
-							<param name="widget_header" value="$LOCALIZE[20390]"/>
+							<param name="widget_header" value="Recently Added Music Videos"/>
 							<param name="widget_target" value="videos"/>
 							<param name="main_label" value="$INFO[ListItem.Label]"/>
 							<param name="sub_label" value="$INFO[ListItem.Artist]"/>
@@ -927,14 +927,14 @@
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(musicvideos) + Skin.HasSetting(show_musicvideoposter) + !Skin.HasSetting(home_no_musicvideos_recentlyadded_widget)">
 							<param name="content_path" value="videodb://recentlyaddedmusicvideos/"/>
-							<param name="widget_header" value="$LOCALIZE[20390]"/>
+							<param name="widget_header" value="Recently Added Music Videos"/>
 							<param name="widget_target" value="videos"/>
 							<param name="fallback_image" value="DefaultMusicSongs.png"/>
 							<param name="list_id" value="16300"/>
 						</include>
 						<include content="WidgetListEpisodes" condition="Library.HasContent(musicvideos) + !Skin.HasSetting(show_musicvideoposter) + !Skin.HasSetting(home_no_musicvideos_unwatched_widget)">
 							<param name="content_path" value="special://skin/playlists/unwatched_musicvideos.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31151]"/>
+							<param name="widget_header" value="Unwatched Music Videos"/>
 							<param name="widget_target" value="videos"/>
 							<param name="main_label" value="$INFO[ListItem.Label]"/>
 							<param name="sub_label" value="$INFO[ListItem.Artist]"/>
@@ -944,14 +944,14 @@
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(musicvideos) + Skin.HasSetting(show_musicvideoposter) + !Skin.HasSetting(home_no_musicvideos_unwatched_widget)">
 							<param name="content_path" value="special://skin/playlists/unwatched_musicvideos.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31151]"/>
+							<param name="widget_header" value="Unwatched Music Videos"/>
 							<param name="widget_target" value="videos"/>
 							<param name="fallback_image" value="DefaultMusicSongs.png"/>
 							<param name="list_id" value="16400"/>
 						</include>
 						<include content="WidgetListSquare" condition="Library.HasContent(musicvideos) + !Skin.HasSetting(home_no_musicvideos_randomartists_widget)">
 							<param name="content_path" value="special://skin/playlists/random_musicvideo_artists.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31013]"/>
+							<param name="widget_header" value="Random Artists"/>
 							<param name="widget_target" value="music"/>
 							<param name="browse_mode" value="never"/>
 							<param name="list_id" value="16200"/>
@@ -959,7 +959,7 @@
 						</include>
 						<include content="WidgetListEpisodes" condition="Library.HasContent(musicvideos) + !Skin.HasSetting(show_musicvideoposter) + !Skin.HasSetting(home_no_musicvideos_random_widget)">
 							<param name="content_path" value="special://skin/playlists/random_musicvideos.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31152]"/>
+							<param name="widget_header" value="Random Music Videos"/>
 							<param name="widget_target" value="videos"/>
 							<param name="main_label" value="$INFO[ListItem.Label]"/>
 							<param name="sub_label" value="$INFO[ListItem.Artist]"/>
@@ -969,7 +969,7 @@
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(musicvideos) + Skin.HasSetting(show_musicvideoposter) + !Skin.HasSetting(home_no_musicvideos_random_widget)">
 							<param name="content_path" value="special://skin/playlists/random_musicvideos.xsp"/>
-							<param name="widget_header" value="$LOCALIZE[31152]"/>
+							<param name="widget_header" value="Random Music Videos"/>
 							<param name="widget_target" value="videos"/>
 							<param name="browse_mode" value="never"/>
 							<param name="fallback_image" value="DefaultMusicSongs.png"/>
@@ -977,7 +977,7 @@
 						</include>
 						<include content="WidgetListCategories" condition="Library.HasContent(musicvideos) + !Skin.HasSetting(home_no_musicvideos_studios_widget)">
 							<param name="content_path" value="videodb://musicvideos/studios/"/>
-							<param name="widget_header" value="$LOCALIZE[20388]"/>
+							<param name="widget_header" value="Studios"/>
 							<param name="widget_target" value="music"/>
 							<param name="list_id" value="16600"/>
 							<param name="icon" value="$VAR[WidgetStudioIconVar]"/>
