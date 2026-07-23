@@ -18,6 +18,16 @@
 				<include>ButtonMenuList</include>
 				<content>
 					<item>
+						<label>$LOCALIZE[40840]</label>
+						<onclick>UpdateLibrary(all)</onclick>
+						<visible>System.GetBool(medialibrary.showupdateinpowermenu)</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[40841]</label>
+						<onclick>CleanLibrary(all)</onclick>
+						<visible>System.GetBool(medialibrary.showcleaninpowermenu)</visible>
+					</item>
+					<item>
 						<label>$LOCALIZE[13012]</label>
 						<onclick>Quit()</onclick>
 						<visible>System.ShowExitButton</visible>
