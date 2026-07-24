@@ -236,6 +236,12 @@
 		</control>
 	</include>
 	<include name="SettingsDialogMovieWidgetsContent">
+		<control type="button" id="22120">
+			<include>DialogSettingButton</include>
+			<label>Reorder Widgets...</label>
+			<onclick>Dialog.Close(1101)</onclick>
+			<onclick>RunScript(special://skin/default.py,widget_order,movies)</onclick>
+		</control>
 		<control type="radiobutton" id="22101">
 			<include>DialogSettingButton</include>
 			<label>$LOCALIZE[31148]</label>
@@ -289,6 +295,12 @@
 		</control>
 	</include>
 	<include name="SettingsDialogAnimeWidgetsContent">
+		<control type="button" id="22120">
+			<include>DialogSettingButton</include>
+			<label>Reorder Widgets...</label>
+			<onclick>Dialog.Close(1101)</onclick>
+			<onclick>RunScript(special://skin/default.py,widget_order,anime)</onclick>
+		</control>
 		<control type="radiobutton" id="22101">
 			<include>DialogSettingButton</include>
 			<label>$LOCALIZE[31148]</label>
@@ -351,6 +363,12 @@
 		</control>
 	</include>
 	<include name="SettingsDialogTVShowWidgetsContent">
+		<control type="button" id="22120">
+			<include>DialogSettingButton</include>
+			<label>Reorder Widgets...</label>
+			<onclick>Dialog.Close(1101)</onclick>
+			<onclick>RunScript(special://skin/default.py,widget_order,tvshows)</onclick>
+		</control>
 		<control type="radiobutton" id="22101">
 			<include>DialogSettingButton</include>
 			<label>$LOCALIZE[31148]</label>
@@ -380,7 +398,7 @@
 		</control>
 		<control type="radiobutton" id="22110">
 			<include>DialogSettingButton</include>
-			<label>Recently Added Shows</label>
+			<label>Recently Added TV Shows</label>
 			<onclick>Skin.ToggleSetting(home_no_tvshows_recentlyadded_widget)</onclick>
 			<selected>!Skin.HasSetting(home_no_tvshows_recentlyadded_widget)</selected>
 		</control>

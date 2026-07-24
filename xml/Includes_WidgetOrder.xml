@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<!-- Each slot resolves to exactly one widget from a persistent Skin.String. -->
+	<include name="MovieWidgetOrderSlot">
+		<definition>
+			<include content="OrderedMovieCategories" condition="String.IsEqual(Skin.String($PARAM[order_setting]),categories)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedMovieInProgress" condition="String.IsEqual(Skin.String($PARAM[order_setting]),inprogress)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedMovieRecent" condition="String.IsEqual(Skin.String($PARAM[order_setting]),recent)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedMovieUnwatched" condition="String.IsEqual(Skin.String($PARAM[order_setting]),unwatched)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedMovieRandom" condition="String.IsEqual(Skin.String($PARAM[order_setting]),random)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedMovieGenres" condition="String.IsEqual(Skin.String($PARAM[order_setting]),genres)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedMovieSets" condition="String.IsEqual(Skin.String($PARAM[order_setting]),sets)"><param name="list_id" value="$PARAM[list_id]"/></include>
+		</definition>
+	</include>
+
+	<include name="OrderedMovieCategories">
+		<definition>
+			<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_categories_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
+				<param name="content_path" value="library://video/movies/"/><param name="additional_movie_items" value="true"/><param name="widget_header" value="$LOCALIZE[31148]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/>
+			</include>
+			<include content="WidgetListCategories" condition="Library.HasContent(movies) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_movies_categories_widget)">
+				<param name="content_path" value="plugin://skin.estuary.roquira/?mode=movie_categories"/><param name="additional_movie_items" value="false"/><param name="widget_header" value="$LOCALIZE[31148]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/>
+			</include>
+		</definition>
+	</include>
+	<include name="OrderedMovieInProgress">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_inprogress_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/inprogress_movies.xsp"/><param name="widget_header" value="In Progress Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_inprogress_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_inprogress.xsp"/><param name="widget_header" value="In Progress Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/></include>
+		</definition>
+	</include>
+	<include name="OrderedMovieRecent">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_recentlyadded_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/recent_unwatched_movies.xsp"/><param name="widget_header" value="Recently Added Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_recentlyadded_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_recent.xsp"/><param name="widget_header" value="Recently Added Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/></include>
+		</definition>
+	</include>
+	<include name="OrderedMovieUnwatched">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_unwatched_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/unwatched_movies.xsp"/><param name="widget_header" value="Unwatched Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_unwatched_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_unwatched.xsp"/><param name="widget_header" value="Unwatched Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/></include>
+		</definition>
+	</include>
+	<include name="OrderedMovieRandom">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_random_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/random_movies.xsp"/><param name="widget_header" value="Random Movies"/><param name="widget_target" value="videos"/><param name="browse_mode" value="never"/><param name="list_id" value="$PARAM[list_id]1"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_random_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_random.xsp"/><param name="widget_header" value="Random Movies"/><param name="widget_target" value="videos"/><param name="browse_mode" value="never"/><param name="list_id" value="$PARAM[list_id]2"/></include>
+		</definition>
+	</include>
+	<include name="OrderedMovieGenres">
+		<definition>
+			<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_genres_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="videodb://movies/genres/"/><param name="widget_header" value="$LOCALIZE[135]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="icon" value="$VAR[WidgetGenreIconVar]"/><param name="icon_height" value="70"/></include>
+			<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_genres_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_genres.xsp"/><param name="widget_header" value="$LOCALIZE[135]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="icon" value="$VAR[WidgetGenreIconVar]"/><param name="icon_height" value="70"/></include>
+		</definition>
+	</include>
+	<include name="OrderedMovieSets">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_sets_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="videodb://movies/sets/"/><param name="widget_header" value="Movie Sets"/><param name="widget_target" value="videos"/><param name="sortby" value="random"/><param name="list_id" value="$PARAM[list_id]1"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[MovieSetOnClickActionVar]"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_sets_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_sets.xsp"/><param name="widget_header" value="Movie Sets"/><param name="widget_target" value="videos"/><param name="sortby" value="random"/><param name="list_id" value="$PARAM[list_id]2"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[MovieSetOnClickActionVar]"/></include>
+		</definition>
+	</include>
+
+	<include name="TVShowWidgetOrderSlot">
+		<definition>
+			<include content="OrderedTVShowCategories" condition="String.IsEqual(Skin.String($PARAM[order_setting]),categories)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedTVShowInProgress" condition="String.IsEqual(Skin.String($PARAM[order_setting]),inprogress)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedTVShowRecentEpisodes" condition="String.IsEqual(Skin.String($PARAM[order_setting]),recentepisodes)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedTVShowRecent" condition="String.IsEqual(Skin.String($PARAM[order_setting]),recent)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedTVShowUnwatched" condition="String.IsEqual(Skin.String($PARAM[order_setting]),unwatched)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedTVShowRandom" condition="String.IsEqual(Skin.String($PARAM[order_setting]),random)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedTVShowGenres" condition="String.IsEqual(Skin.String($PARAM[order_setting]),genres)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedTVShowStudios" condition="String.IsEqual(Skin.String($PARAM[order_setting]),studios)"><param name="list_id" value="$PARAM[list_id]"/></include>
+		</definition>
+	</include>
+
+	<include name="OrderedTVShowCategories">
+		<definition>
+			<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_categories_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="library://video/tvshows/"/><param name="additional_tvshow_items" value="true"/><param name="widget_header" value="$LOCALIZE[31148]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/></include>
+			<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_categories_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="plugin://skin.estuary.roquira/?mode=tv_categories"/><param name="additional_tvshow_items" value="false"/><param name="widget_header" value="$LOCALIZE[31148]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/></include>
+		</definition>
+	</include>
+	<include name="OrderedTVShowInProgress">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_inprogress_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="videodb://inprogresstvshows"/><param name="sortby" value="lastplayed"/><param name="sortorder" value="descending"/><param name="widget_header" value="In Progress TV Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_inprogress_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_inprogress.xsp"/><param name="sortby" value="lastplayed"/><param name="sortorder" value="descending"/><param name="widget_header" value="In Progress TV Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+		</definition>
+	</include>
+	<include name="OrderedTVShowRecentEpisodes">
+		<definition>
+			<include content="WidgetListEpisodes" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyaddedepisodes_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/recent_unwatched_episodes.xsp"/><param name="widget_header" value="Recently Added Episodes"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/></include>
+			<include content="WidgetListEpisodes" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyaddedepisodes_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_episodes_recent.xsp"/><param name="widget_header" value="Recently Added Episodes"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/></include>
+		</definition>
+	</include>
+	<include name="OrderedTVShowRecent">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyadded_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/recent_tvshows.xsp"/><param name="widget_header" value="Recently Added TV Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyadded_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_recent.xsp"/><param name="widget_header" value="Recently Added TV Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+		</definition>
+	</include>
+	<include name="OrderedTVShowUnwatched">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_unwatched_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/unwatched_tvshows.xsp"/><param name="widget_header" value="Unwatched TV Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_unwatched_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_unwatched.xsp"/><param name="widget_header" value="Unwatched TV Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+		</definition>
+	</include>
+	<include name="OrderedTVShowRandom">
+		<definition>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_random_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://skin/playlists/random_tvshows.xsp"/><param name="widget_header" value="Random TV Shows"/><param name="widget_target" value="videos"/><param name="browse_mode" value="never"/><param name="list_id" value="$PARAM[list_id]1"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+			<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_random_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_random.xsp"/><param name="widget_header" value="Random TV Shows"/><param name="widget_target" value="videos"/><param name="browse_mode" value="never"/><param name="list_id" value="$PARAM[list_id]2"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include>
+		</definition>
+	</include>
+	<include name="OrderedTVShowGenres">
+		<definition>
+			<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_genres_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="videodb://tvshows/genres/"/><param name="widget_header" value="$LOCALIZE[135]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="icon" value="$VAR[WidgetGenreIconVar]"/><param name="icon_height" value="70"/></include>
+			<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_genres_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_genres.xsp"/><param name="widget_header" value="$LOCALIZE[135]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="icon" value="$VAR[WidgetGenreIconVar]"/><param name="icon_height" value="70"/></include>
+		</definition>
+	</include>
+	<include name="OrderedTVShowStudios">
+		<definition>
+			<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_studios_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="videodb://tvshows/studios/"/><param name="widget_header" value="Studios"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="icon" value="$VAR[WidgetStudioIconVar]"/><param name="icon_height" value="70"/></include>
+			<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_studios_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_studios.xsp"/><param name="widget_header" value="Studios"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="icon" value="$VAR[WidgetStudioIconVar]"/><param name="icon_height" value="70"/></include>
+		</definition>
+	</include>
+
+	<include name="AnimeWidgetOrderSlot">
+		<definition>
+			<include content="OrderedAnimeCategories" condition="String.IsEqual(Skin.String($PARAM[order_setting]),categories)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeMovieInProgress" condition="String.IsEqual(Skin.String($PARAM[order_setting]),movieinprogress)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeShowInProgress" condition="String.IsEqual(Skin.String($PARAM[order_setting]),showinprogress)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeRecentMovies" condition="String.IsEqual(Skin.String($PARAM[order_setting]),recentmovies)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeRecentEpisodes" condition="String.IsEqual(Skin.String($PARAM[order_setting]),recentepisodes)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeRecentShows" condition="String.IsEqual(Skin.String($PARAM[order_setting]),recentshows)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeUnwatchedMovies" condition="String.IsEqual(Skin.String($PARAM[order_setting]),unwatchedmovies)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeUnwatchedShows" condition="String.IsEqual(Skin.String($PARAM[order_setting]),unwatchedshows)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeRandomMovies" condition="String.IsEqual(Skin.String($PARAM[order_setting]),randommovies)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedAnimeRandomShows" condition="String.IsEqual(Skin.String($PARAM[order_setting]),randomshows)"><param name="list_id" value="$PARAM[list_id]"/></include>
+		</definition>
+	</include>
+
+	<include name="OrderedAnimeCategories"><definition><include content="WidgetListCategories" condition="!Skin.HasSetting(home_no_anime_categories_widget)"><param name="content_path" value="plugin://skin.estuary.roquira/?mode=anime_categories"/><param name="widget_header" value="Categories"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/></include></definition></include>
+	<include name="OrderedAnimeMovieInProgress"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_movies_inprogress_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_movies_inprogress.xsp"/><param name="widget_header" value="Continue Watching Anime Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/></include></definition></include>
+	<include name="OrderedAnimeShowInProgress"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_tvshows_inprogress_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_tvshows_inprogress.xsp"/><param name="widget_header" value="Continue Watching Anime Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include></definition></include>
+	<include name="OrderedAnimeRecentMovies"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_movies_recentlyadded_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_movies_recent.xsp"/><param name="widget_header" value="Recently Added Anime Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/></include></definition></include>
+	<include name="OrderedAnimeRecentEpisodes"><definition><include content="WidgetListEpisodes" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_episodes_recentlyadded_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_episodes_recent.xsp"/><param name="widget_header" value="Recently Added Anime Episodes"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/></include></definition></include>
+	<include name="OrderedAnimeRecentShows"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_tvshows_recentlyadded_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_tvshows_recent.xsp"/><param name="widget_header" value="Recently Added Anime Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include></definition></include>
+	<include name="OrderedAnimeUnwatchedMovies"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_movies_unwatched_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_movies_unwatched.xsp"/><param name="widget_header" value="Unwatched Anime Movies"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/></include></definition></include>
+	<include name="OrderedAnimeUnwatchedShows"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_tvshows_unwatched_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_tvshows_unwatched.xsp"/><param name="widget_header" value="Unwatched Anime Shows"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include></definition></include>
+	<include name="OrderedAnimeRandomMovies"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_movies_random_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_movies_random.xsp"/><param name="widget_header" value="Random Anime Movies"/><param name="widget_target" value="videos"/><param name="browse_mode" value="never"/><param name="list_id" value="$PARAM[list_id]"/></include></definition></include>
+	<include name="OrderedAnimeRandomShows"><definition><include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_tvshows_random_widget)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_tvshows_random.xsp"/><param name="widget_header" value="Random Anime Shows"/><param name="widget_target" value="videos"/><param name="browse_mode" value="never"/><param name="list_id" value="$PARAM[list_id]"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/></include></definition></include>
+</includes>

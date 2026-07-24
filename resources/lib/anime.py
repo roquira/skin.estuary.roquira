@@ -388,7 +388,7 @@ def generate_playlists(notify: bool = False) -> dict[str, object]:
     write_playlist("main_episodes_recent.xsp", "episodes", "Recently Added Episodes", exclude_paths=show_excludes,
                    extra_rules=[("dateadded", "after", "2012-01-01"), ("playcount", "lessthan", "1")],
                    limit=15, order="dateadded", direction="descending")
-    write_playlist("main_tvshows_recent.xsp", "tvshows", "Recently Added Shows", exclude_paths=show_excludes,
+    write_playlist("main_tvshows_recent.xsp", "tvshows", "Recently Added TV Shows", exclude_paths=show_excludes,
                    extra_rules=[("dateadded", "after", "2012-01-01"), ("numepisodes", "greaterthan", "0")],
                    limit=15, order="dateadded", direction="descending")
     write_playlist("main_tvshows_unwatched.xsp", "tvshows", "Unwatched TV Shows", exclude_paths=show_excludes,
