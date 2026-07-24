@@ -304,6 +304,9 @@ _REQUIRED_PLAYLISTS = (
     "anime_tvshows_titles.xsp",
     "main_movies_titles.xsp",
     "main_tvshows_titles.xsp",
+    "anime_tvshows_recent.xsp",
+    "main_tvshows_recent.xsp",
+    "main_tvshows_random.xsp",
 )
 
 
@@ -345,6 +348,9 @@ def generate_playlists(notify: bool = False) -> dict[str, object]:
     write_playlist("anime_episodes_recent.xsp", "episodes", "Recently Added Anime Episodes", include_paths=show_paths,
                    extra_rules=[("dateadded", "after", "2012-01-01"), ("playcount", "lessthan", "1")],
                    limit=15, order="dateadded", direction="descending")
+    write_playlist("anime_tvshows_recent.xsp", "tvshows", "Recently Added Anime Shows", include_paths=show_paths,
+                   extra_rules=[("dateadded", "after", "2012-01-01"), ("numepisodes", "greaterthan", "0")],
+                   limit=15, order="dateadded", direction="descending")
     write_playlist("anime_tvshows_unwatched.xsp", "tvshows", "Unwatched Anime Shows", include_paths=show_paths,
                    extra_rules=[("numwatched", "is", "0"), ("numepisodes", "greaterthan", "0")],
                    limit=15, order="random")
@@ -382,8 +388,13 @@ def generate_playlists(notify: bool = False) -> dict[str, object]:
     write_playlist("main_episodes_recent.xsp", "episodes", "Recently Added Episodes", exclude_paths=show_excludes,
                    extra_rules=[("dateadded", "after", "2012-01-01"), ("playcount", "lessthan", "1")],
                    limit=15, order="dateadded", direction="descending")
+    write_playlist("main_tvshows_recent.xsp", "tvshows", "Recently Added Shows", exclude_paths=show_excludes,
+                   extra_rules=[("dateadded", "after", "2012-01-01"), ("numepisodes", "greaterthan", "0")],
+                   limit=15, order="dateadded", direction="descending")
     write_playlist("main_tvshows_unwatched.xsp", "tvshows", "Unwatched TV Shows", exclude_paths=show_excludes,
                    extra_rules=[("numwatched", "is", "0"), ("numepisodes", "greaterthan", "0")],
+                   limit=15, order="random")
+    write_playlist("main_tvshows_random.xsp", "tvshows", "Random TV Shows", exclude_paths=show_excludes,
                    limit=15, order="random")
     for suffix, group in [("genres", "genres"), ("years", "years"), ("actors", "actors"), ("studios", "studios")]:
         write_playlist(f"main_tvshows_{suffix}.xsp", "tvshows", f"TV Show {suffix.title()}",

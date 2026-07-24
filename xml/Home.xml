@@ -83,6 +83,14 @@
 			<param name="widget_target" value="videos"/>
 			<param name="list_id" value="22400"/>
 		</include>
+		<include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_tvshows_recentlyadded_widget)">
+			<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_tvshows_recent.xsp"/>
+			<param name="widget_header" value="Recently Added Anime Shows"/>
+			<param name="widget_target" value="videos"/>
+			<param name="list_id" value="22450"/>
+			<param name="onclick_condition" value="true"/>
+			<param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/>
+		</include>
 		<include content="WidgetListPoster" condition="String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true) + !Skin.HasSetting(home_no_anime_movies_unwatched_widget)">
 			<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/anime_movies_unwatched.xsp"/>
 			<param name="widget_header" value="Unwatched Anime Movies"/>
@@ -267,6 +275,14 @@
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="26200"/>
 						</include>
+						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyadded_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
+							<param name="content_path" value="special://skin/playlists/recent_tvshows.xsp"/>
+							<param name="widget_header" value="Recently Added Shows"/>
+							<param name="widget_target" value="videos"/>
+							<param name="list_id" value="26250"/>
+							<param name="onclick_condition" value="true"/>
+							<param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/>
+						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_unwatched_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://skin/playlists/unwatched_tvshows.xsp"/>
 							<param name="widget_header" value="Unwatched TV Shows"/>
@@ -275,11 +291,20 @@
 							<param name="onclick_condition" value="true"/>
 							<param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/>
 						</include>
+						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_random_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
+							<param name="content_path" value="special://skin/playlists/random_tvshows.xsp"/>
+							<param name="widget_header" value="Random TV Shows"/>
+							<param name="widget_target" value="videos"/>
+							<param name="browse_mode" value="never"/>
+							<param name="list_id" value="26400"/>
+							<param name="onclick_condition" value="true"/>
+							<param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/>
+						</include>
 						<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_genres_widget) + !String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="videodb://tvshows/genres/"/>
 							<param name="widget_header" value="$LOCALIZE[135]"/>
 							<param name="widget_target" value="videos"/>
-							<param name="list_id" value="26400"/>
+							<param name="list_id" value="26500"/>
 							<param name="icon" value="$VAR[WidgetGenreIconVar]"/>
 							<param name="icon_height" value="70"/>
 						</include>
@@ -287,7 +312,7 @@
 							<param name="content_path" value="videodb://tvshows/studios/"/>
 							<param name="widget_header" value="Studios"/>
 							<param name="widget_target" value="videos"/>
-							<param name="list_id" value="26500"/>
+							<param name="list_id" value="26600"/>
 							<param name="icon" value="$VAR[WidgetStudioIconVar]"/>
 							<param name="icon_height" value="70"/>
 						</include>
@@ -314,6 +339,14 @@
 							<param name="widget_target" value="videos"/>
 							<param name="list_id" value="6200"/>
 						</include>
+						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_recentlyadded_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
+							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_recent.xsp"/>
+							<param name="widget_header" value="Recently Added Shows"/>
+							<param name="widget_target" value="videos"/>
+							<param name="list_id" value="6250"/>
+							<param name="onclick_condition" value="true"/>
+							<param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/>
+						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_unwatched_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_unwatched.xsp"/>
 							<param name="widget_header" value="Unwatched TV Shows"/>
@@ -322,11 +355,20 @@
 							<param name="onclick_condition" value="true"/>
 							<param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/>
 						</include>
+						<include content="WidgetListPoster" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_random_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
+							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_random.xsp"/>
+							<param name="widget_header" value="Random TV Shows"/>
+							<param name="widget_target" value="videos"/>
+							<param name="browse_mode" value="never"/>
+							<param name="list_id" value="6400"/>
+							<param name="onclick_condition" value="true"/>
+							<param name="onclick_action" value="$VAR[TVShowOnClickActionVar]"/>
+						</include>
 						<include content="WidgetListCategories" condition="Library.HasContent(tvshows) + !Skin.HasSetting(home_no_tvshows_genres_widget) + String.IsEqual(Window(Home).Property(EstuaryRoquira.PlaylistsReady),true)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_genres.xsp"/>
 							<param name="widget_header" value="$LOCALIZE[135]"/>
 							<param name="widget_target" value="videos"/>
-							<param name="list_id" value="6400"/>
+							<param name="list_id" value="6500"/>
 							<param name="icon" value="$VAR[WidgetGenreIconVar]"/>
 							<param name="icon_height" value="70"/>
 						</include>
@@ -334,7 +376,7 @@
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_tvshows_studios.xsp"/>
 							<param name="widget_header" value="Studios"/>
 							<param name="widget_target" value="videos"/>
-							<param name="list_id" value="6500"/>
+							<param name="list_id" value="6600"/>
 							<param name="icon" value="$VAR[WidgetStudioIconVar]"/>
 							<param name="icon_height" value="70"/>
 						</include>
