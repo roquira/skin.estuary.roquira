@@ -112,6 +112,7 @@
 		<value condition="$EXP[videoasset_true] + Container.SortMethod(33)">$VAR[VideoCodecVar]</value>
 		<value condition="$EXP[videoasset_true] + Container.SortMethod(36)">$VAR[AudioCodecVar]</value>
 		<value condition="Container.SortMethod(9)">$INFO[ListItem.Duration]</value>
+		<value condition="Skin.HasSetting(hide_episode_ratings) + [Container.Content(episodes) | String.IsEqual(ListItem.DBType,episode)]"></value>
 		<value>$INFO[ListItem.Label2]</value>
 	</variable>
 	<variable name="PlotTextBoxVar">

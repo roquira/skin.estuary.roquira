@@ -209,7 +209,7 @@
 						<param name="control_id" value="149" />
 						<param name="label" value="[COLOR button_focus]$LOCALIZE[563]: [/COLOR]$INFO[ListItem.RatingAndVotes]" />
 						<param name="altlabel" value="$LOCALIZE[563]: $INFO[ListItem.RatingAndVotes]" />
-						<param name="visible" value="!String.IsEmpty(ListItem.RatingAndVotes)" />
+						<param name="visible" value="!String.IsEmpty(ListItem.RatingAndVotes) + [!Skin.HasSetting(hide_episode_ratings) | !String.IsEqual(ListItem.DBType,episode)]" />
 					</include>
 					<include content="InfoDialogMetadata">
 						<param name="control_id" value="150" />

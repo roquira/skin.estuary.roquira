@@ -98,6 +98,7 @@
 		<param name="animation">false</param>
 		<definition>
 			<control type="group">
+				<visible>!Skin.HasSetting(hide_episode_ratings) | [!String.IsEqual(ListItem.DBType,episode) + !Container.Content(episodes)]</visible>
 				<animation effect="fade" time="0" condition="$PARAM[animation]">VisibleChange</animation>
 				<include content="UserRatingContent" condition="Skin.HasSetting(circle_userrating)">
 					<param name="infolabel" value="ListItem.UserRating" />
