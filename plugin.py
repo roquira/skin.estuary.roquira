@@ -80,6 +80,8 @@ def main() -> None:
     try:
         if not playlists_available():
             generate_playlists(notify=False)
+        else:
+            set_playlists_ready(True)
     except Exception as exc:
         set_playlists_ready(False)
         xbmc.log(f"[{ADDON_ID}] Plugin playlist generation failed: {exc}", xbmc.LOGERROR)

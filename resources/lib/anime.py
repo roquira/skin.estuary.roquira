@@ -18,6 +18,8 @@ DEFAULT_MOVIE_SOURCE = "Anime Movies"
 DEFAULT_SHOW_SOURCE = "Anime Shows"
 INVALID_PATH = "special://profile/addon_data/skin.estuary.roquira/source-not-found/"
 READY_PROPERTY = "EstuaryRoquira.PlaylistsReady"
+READY_SKIN_SETTING = "estuaryroquira_playlists_ready"
+READY_MIGRATION_PROPERTY = "EstuaryRoquira.PersistentReadyMigration"
 
 
 def _addon() -> xbmcaddon.Addon:
@@ -73,7 +75,22 @@ def set_playlists_ready(ready: bool) -> None:
     window = xbmcgui.Window(10000)
     if ready:
         window.setProperty(READY_PROPERTY, "true")
+        # Home's conditional includes are selected while Home.xml is built.
+        # A window property set later in startup is too late, leaving Anime
+        # absent and Movies/TV Shows on their unfiltered fallback branches.
+        # Persist readiness so subsequent boots select the filtered branches
+        # immediately. Reload once when migrating an existing installation.
+        if not xbmc.getCondVisibility(f"Skin.HasSetting({READY_SKIN_SETTING})"):
+            reload_required = window.getProperty(READY_MIGRATION_PROPERTY) != "true"
+            window.setProperty(READY_MIGRATION_PROPERTY, "true")
+            xbmc.executebuiltin(f"Skin.SetBool({READY_SKIN_SETTING})")
+            if reload_required:
+                xbmc.log(f"[{ADDON_ID}] Migrating Home to persistent playlist readiness", xbmc.LOGINFO)
+                xbmc.executebuiltin("ReloadSkin()")
     else:
+        # Keep the persistent initialization marker on transient refresh
+        # failures. Existing playlists remain usable and should not make Home
+        # fall back to unfiltered Movies/TV Shows during an always-on session.
         window.clearProperty(READY_PROPERTY)
 
 
@@ -215,6 +232,36 @@ def _add_rule(parent: ET.Element, field: str, operator: str, values: Iterable[st
         ET.SubElement(rule, "value").text = str(value)
 
 
+def _write_playlist_payload(destination: Path, payload: bytes) -> None:
+    try:
+        if destination.is_file() and destination.read_bytes() == payload:
+            return
+    except OSError:
+        # A later atomic replacement will either succeed or report the real
+        # filesystem error to the caller.
+        pass
+
+    # Plugin routes and the background service may generate simultaneously.
+    # A unique temporary filename prevents one process from moving another
+    # process's .tmp file, which caused intermittent category warning entries.
+    fd, temporary_name = tempfile.mkstemp(
+        prefix=destination.name + ".",
+        suffix=".tmp",
+        dir=str(destination.parent),
+    )
+    try:
+        with os.fdopen(fd, "wb") as temporary_file:
+            temporary_file.write(payload)
+            temporary_file.flush()
+        os.replace(temporary_name, destination)
+    finally:
+        try:
+            if os.path.exists(temporary_name):
+                os.unlink(temporary_name)
+        except OSError:
+            pass
+
+
 def write_playlist(
     filename: str,
     media_type: str,
@@ -262,40 +309,14 @@ def write_playlist(
 
     tree = ET.ElementTree(root)
     ET.indent(tree, space="    ")
-    destination = playlist_dir() / filename
-
     # Build the complete file in memory first. Avoid touching the destination
     # when nothing changed; Kodi can keep reading the existing playlist.
     buffer = io.BytesIO()
     tree.write(buffer, encoding="utf-8", xml_declaration=True)
     payload = buffer.getvalue()
-    try:
-        if destination.is_file() and destination.read_bytes() == payload:
-            return
-    except OSError:
-        # A later atomic replacement will either succeed or report the real
-        # filesystem error to the caller.
-        pass
 
-    # Plugin routes and the background service may generate simultaneously.
-    # A unique temporary filename prevents one process from moving another
-    # process's .tmp file, which caused intermittent category warning entries.
-    fd, temporary_name = tempfile.mkstemp(
-        prefix=destination.name + ".",
-        suffix=".tmp",
-        dir=str(destination.parent),
-    )
-    try:
-        with os.fdopen(fd, "wb") as temporary_file:
-            temporary_file.write(payload)
-            temporary_file.flush()
-        os.replace(temporary_name, destination)
-    finally:
-        try:
-            if os.path.exists(temporary_name):
-                os.unlink(temporary_name)
-        except OSError:
-            pass
+    directory = playlist_dir()
+    _write_playlist_payload(directory / filename, payload)
 
 
 
