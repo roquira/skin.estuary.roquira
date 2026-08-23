@@ -73,6 +73,12 @@
 					<onclick>Skin.ToggleSetting(hide_episode_ratings)</onclick>
 					<selected>Skin.HasSetting(hide_episode_ratings)</selected>
 				</control>
+				<control type="radiobutton" id="710">
+					<label>Show Movie Country Flags</label>
+					<include>DefaultSettingButton</include>
+					<onclick>Skin.ToggleSetting(hide_movie_country_flags)</onclick>
+					<selected>!Skin.HasSetting(hide_movie_country_flags)</selected>
+				</control>
 				<control type="button" id="707">
 					<label>$LOCALIZE[31164]</label>
 					<include>DefaultSettingButton</include>

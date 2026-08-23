@@ -15,6 +15,7 @@ WIDGETS = {
         ("unwatched", "Unwatched Movies", "home_no_movies_unwatched_widget"),
         ("random", "Random Movies", "home_no_movies_random_widget"),
         ("genres", "Genres", "home_no_movies_genres_widget"),
+        ("countries", "Countries", "home_no_movies_countries_widget"),
         ("sets", "Movie Sets", "home_no_movies_sets_widget"),
     ),
     "tvshows": (

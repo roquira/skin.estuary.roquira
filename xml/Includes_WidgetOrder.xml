@@ -9,6 +9,7 @@
 			<include content="OrderedMovieUnwatched" condition="String.IsEqual(Skin.String($PARAM[order_setting]),unwatched)"><param name="list_id" value="$PARAM[list_id]"/></include>
 			<include content="OrderedMovieRandom" condition="String.IsEqual(Skin.String($PARAM[order_setting]),random)"><param name="list_id" value="$PARAM[list_id]"/></include>
 			<include content="OrderedMovieGenres" condition="String.IsEqual(Skin.String($PARAM[order_setting]),genres)"><param name="list_id" value="$PARAM[list_id]"/></include>
+			<include content="OrderedMovieCountries" condition="String.IsEqual(Skin.String($PARAM[order_setting]),countries)"><param name="list_id" value="$PARAM[list_id]"/></include>
 			<include content="OrderedMovieSets" condition="String.IsEqual(Skin.String($PARAM[order_setting]),sets)"><param name="list_id" value="$PARAM[list_id]"/></include>
 		</definition>
 	</include>
@@ -51,6 +52,12 @@
 		<definition>
 			<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_genres_widget) + !Skin.HasSetting(estuaryroquira_playlists_ready)"><param name="content_path" value="videodb://movies/genres/"/><param name="widget_header" value="$LOCALIZE[135]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="icon" value="$VAR[WidgetGenreIconVar]"/><param name="icon_height" value="70"/></include>
 			<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_genres_widget) + Skin.HasSetting(estuaryroquira_playlists_ready)"><param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_genres.xsp"/><param name="widget_header" value="$LOCALIZE[135]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="icon" value="$VAR[WidgetGenreIconVar]"/><param name="icon_height" value="70"/></include>
+		</definition>
+	</include>
+	<include name="OrderedMovieCountries">
+		<definition>
+			<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_countries_widget) + !Skin.HasSetting(estuaryroquira_playlists_ready)"><param name="content_path" value="videodb://movies/countries/"/><param name="widget_header" value="$LOCALIZE[20451]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]1"/><param name="icon" value="$VAR[WidgetCountryIconVar]"/><param name="icon_height" value="70"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="ActivateWindow(videos,$INFO[ListItem.FilenameAndPath],return)"/></include>
+			<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(home_no_movies_countries_widget) + Skin.HasSetting(estuaryroquira_playlists_ready)"><param name="content_path" value="plugin://skin.estuary.roquira/?mode=movie_countries"/><param name="widget_header" value="$LOCALIZE[20451]"/><param name="widget_target" value="videos"/><param name="list_id" value="$PARAM[list_id]2"/><param name="icon" value="$VAR[WidgetCountryIconVar]"/><param name="icon_height" value="70"/><param name="onclick_condition" value="true"/><param name="onclick_action" value="ActivateWindow(videos,$INFO[ListItem.FilenameAndPath],return)"/></include>
 		</definition>
 	</include>
 	<include name="OrderedMovieSets">

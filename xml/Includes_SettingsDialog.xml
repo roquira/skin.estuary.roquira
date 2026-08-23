@@ -287,6 +287,12 @@
 			<onclick>Skin.ToggleSetting(home_no_movies_genres_widget)</onclick>
 			<selected>!Skin.HasSetting(home_no_movies_genres_widget)</selected>
 		</control>
+		<control type="radiobutton" id="22109">
+			<include>DialogSettingButton</include>
+			<label>$LOCALIZE[20451]</label>
+			<onclick>Skin.ToggleSetting(home_no_movies_countries_widget)</onclick>
+			<selected>!Skin.HasSetting(home_no_movies_countries_widget)</selected>
+		</control>
 		<control type="radiobutton" id="22107">
 			<include>DialogSettingButton</include>
 			<label>$LOCALIZE[31075]</label>

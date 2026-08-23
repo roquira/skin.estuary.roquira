@@ -282,6 +282,7 @@
 		<param name="additional_tvshow_items">false</param>
 		<param name="visible">true</param>
 		<param name="browse">auto</param>
+		<param name="onclick_condition">false</param>
 		<definition>
 			<include content="CategoryLabel">
 				<param name="label">$PARAM[widget_header]</param>
@@ -297,6 +298,7 @@
 				<top>110</top>
 				<right>0</right>
 				<height>290</height>
+				<onclick condition="$PARAM[onclick_condition]">$PARAM[onclick_action]</onclick>
 				<include content="WidgetListCommon">
 					<param name="list_id" value="$PARAM[list_id]"/>
 				</include>

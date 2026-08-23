@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import io
 import json
 import os
@@ -107,6 +108,77 @@ def playlist_dir() -> Path:
 
 def kodi_playlist_path(filename: str) -> str:
     return f"special://profile/addon_data/{ADDON_ID}/playlists/{filename}"
+
+
+def _main_movie_exclude_paths() -> list[str]:
+    if not _bool_setting("exclude_from_main", True):
+        return []
+    movie_sources = source_names_for_setting("anime_movies_source", DEFAULT_MOVIE_SOURCE)
+    return resolve_source_paths(movie_sources, read_video_sources())
+
+
+def _is_under_source(file_path: str, source_paths: Iterable[str]) -> bool:
+    folded_file = file_path.replace("\\", "/").casefold()
+    return any(
+        folded_file.startswith(source_path.replace("\\", "/").casefold())
+        for source_path in source_paths
+        if source_path
+    )
+
+
+def generate_movie_country_playlists() -> list[tuple[str, str]]:
+    """Return explicit country folders for Home instead of Kodi's broken grouped paths."""
+    request = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "VideoLibrary.GetMovies",
+        "params": {"properties": ["country", "file"]},
+    }
+    try:
+        response = json.loads(xbmc.executeJSONRPC(json.dumps(request)))
+    except (TypeError, ValueError) as exc:
+        xbmc.log(f"[{ADDON_ID}] Cannot read Movie countries: {exc}", xbmc.LOGERROR)
+        return []
+
+    if "error" in response:
+        xbmc.log(f"[{ADDON_ID}] Cannot read Movie countries: {response['error']}", xbmc.LOGERROR)
+        return []
+
+    exclude_paths = _main_movie_exclude_paths()
+    countries: dict[str, str] = {}
+    for movie in response.get("result", {}).get("movies", []):
+        file_path = movie.get("file", "")
+        if not isinstance(file_path, str) or _is_under_source(file_path, exclude_paths):
+            continue
+        raw_countries = movie.get("country", [])
+        if isinstance(raw_countries, str):
+            # JSON-RPC normally returns an array. Retain compatibility with
+            # older/custom builds that expose Kodi's display separator.
+            raw_countries = raw_countries.split(" / ")
+        if not isinstance(raw_countries, list):
+            continue
+        for country in raw_countries:
+            if not isinstance(country, str):
+                continue
+            clean_country = country.strip()
+            if clean_country:
+                countries.setdefault(clean_country.casefold(), clean_country)
+
+    result = []
+    for key in sorted(countries):
+        country = countries[key]
+        digest = hashlib.sha256(country.encode("utf-8")).hexdigest()[:16]
+        filename = f"main_movies_country_{digest}.xsp"
+        write_playlist(
+            filename,
+            "movies",
+            country,
+            exclude_paths=exclude_paths,
+            extra_rules=[("country", "is", country)],
+            order="sorttitle",
+        )
+        result.append((country, filename))
+    return result
 
 
 def read_video_sources() -> dict[str, list[str]]:
@@ -324,6 +396,7 @@ _REQUIRED_PLAYLISTS = (
     "anime_movies_titles.xsp",
     "anime_tvshows_titles.xsp",
     "main_movies_titles.xsp",
+    "main_movies_countries.xsp",
     "main_tvshows_titles.xsp",
     "anime_tvshows_recent.xsp",
     "main_tvshows_recent.xsp",
@@ -395,8 +468,8 @@ def generate_playlists(notify: bool = False) -> dict[str, object]:
                    extra_rules=[("playcount", "is", "0")], limit=15, order="random", direction="descending")
     write_playlist("main_movies_random.xsp", "movies", "Random Movies", exclude_paths=movie_excludes,
                    limit=15, order="random", direction="descending")
-    for suffix, group in [("genres", "genres"), ("years", "years"), ("actors", "actors"),
-                          ("directors", "directors"), ("studios", "studios")]:
+    for suffix, group in [("genres", "genres"), ("countries", "countries"), ("years", "years"),
+                          ("actors", "actors"), ("directors", "directors"), ("studios", "studios")]:
         write_playlist(f"main_movies_{suffix}.xsp", "movies", f"Movie {suffix.title()}",
                        exclude_paths=movie_excludes, group=group)
     write_playlist("main_movies_sets.xsp", "movies", "Movie Sets", exclude_paths=movie_excludes,

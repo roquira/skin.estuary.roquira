@@ -25,7 +25,7 @@
 		<platform>all</platform>
 		<summary lang="en_GB">Estuary with an Anime home category and other refinements.</summary>
 		<description lang="en_GB">A personal fork of Estuary, the default Kodi skin, for Kodi 22. It installs alongside Estuary.</description>
-		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0, MIT (country flag artwork)</license>
 		<source>https://github.com/roquira/skin.estuary.roquira</source>
 		<assets>
 			<icon>resources/icon.png</icon>

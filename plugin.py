@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.join(ADDON_PATH, "resources", "lib"))
 
 from anime import (  # noqa: E402
     ADDON_ID,
+    generate_movie_country_playlists,
     generate_playlists,
     kodi_playlist_path,
     playlists_available,
@@ -24,11 +25,15 @@ PARAMS = parse_qs(sys.argv[2][1:] if len(sys.argv) > 2 and sys.argv[2].startswit
 MODE = PARAMS.get("mode", ["anime_hub"])[0]
 
 
-def add_folder(label: str, playlist: str, icon: str) -> None:
+def add_path_folder(label: str, path: str, icon: str) -> None:
     item = xbmcgui.ListItem(label=label)
     item.setArt({"icon": icon, "thumb": icon})
     item.setProperty("IsPlayable", "false")
-    xbmcplugin.addDirectoryItem(HANDLE, kodi_playlist_path(playlist), item, isFolder=True)
+    xbmcplugin.addDirectoryItem(HANDLE, path, item, isFolder=True)
+
+
+def add_folder(label: str, playlist: str, icon: str) -> None:
+    add_path_folder(label, kodi_playlist_path(playlist), icon)
 
 
 def anime_hub() -> None:
@@ -56,11 +61,19 @@ def movie_categories() -> None:
     xbmcplugin.setContent(HANDLE, "files")
     add_folder("Titles", "main_movies_titles.xsp", "DefaultMovieTitle.png")
     add_folder("Genres", "main_movies_genres.xsp", "DefaultGenre.png")
+    add_path_folder("Countries", f"plugin://{ADDON_ID}/?mode=movie_countries", "DefaultCountry.png")
     add_folder("Years", "main_movies_years.xsp", "DefaultYear.png")
     add_folder("Actors", "main_movies_actors.xsp", "DefaultActor.png")
     add_folder("Directors", "main_movies_directors.xsp", "DefaultDirector.png")
     add_folder("Studios", "main_movies_studios.xsp", "DefaultStudios.png")
     add_folder("Sets", "main_movies_sets.xsp", "DefaultSets.png")
+
+
+def movie_countries() -> None:
+    xbmcplugin.setPluginCategory(HANDLE, "Countries")
+    xbmcplugin.setContent(HANDLE, "countries")
+    for country, playlist in generate_movie_country_playlists():
+        add_folder(country, playlist, f"special://skin/media/flags/countries/{country}.png")
 
 
 def tv_categories() -> None:
@@ -94,6 +107,7 @@ def main() -> None:
         "anime_hub": anime_hub,
         "anime_categories": anime_categories,
         "movie_categories": movie_categories,
+        "movie_countries": movie_countries,
         "tv_categories": tv_categories,
     }
     routes.get(MODE, anime_hub)()

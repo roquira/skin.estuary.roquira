@@ -75,6 +75,7 @@
 	<variable name="IconWallThumbVar">
 		<value condition="String.IsEqual(listitem.dbtype,genre) + System.AddonIsEnabled(resource.images.moviegenreicons.transparent)">$INFO[ListItem.Label,resource://resource.images.moviegenreicons.transparent/,.png]</value>
 		<value condition="String.IsEqual(listitem.dbtype,studio) + System.AddonIsEnabled(resource.images.studios.white)">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</value>
+		<value condition="Container.Content(countries)">$INFO[ListItem.Label,flags/countries/,.png]</value>
 		<value condition="!String.IsEmpty(Listitem.Art(poster)) + ![Container.Content(musicvideos) + !Skin.HasSetting(show_musicvideoposter)]">$INFO[Listitem.Art(poster)]</value>
 		<value condition="!String.isempty(ListItem.Thumb)">$INFO[ListItem.Thumb]</value>
 		<value>$INFO[ListItem.Icon]</value>
@@ -192,6 +193,10 @@
 		<value condition="String.IsEqual(ListItem.Property(node.type),target_folder)">$INFO[ListItem.Icon]</value>
 		<value condition="System.AddonIsEnabled(resource.images.studios.white)">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</value>
 		<value>DefaultStudios.png</value>
+	</variable>
+	<variable name="WidgetCountryIconVar">
+		<value condition="String.IsEqual(ListItem.Property(node.type),target_folder)">$INFO[ListItem.Icon]</value>
+		<value>$INFO[ListItem.Label,flags/countries/,.png]</value>
 	</variable>
 	<variable name="WidgetPlaylistIconVar">
 		<value condition="String.IsEqual(ListItem.Property(node.type),target_folder)">$INFO[ListItem.Icon]</value>

@@ -151,6 +151,8 @@
 						<include content="MovieWidgetOrderSlot" condition="Skin.HasSetting(estuaryroquira_custom_widget_order_movies)"><param name="order_setting" value="estuaryroquira_widget_order_movies_5"/><param name="list_id" value="5750"/></include>
 						<include content="MovieWidgetOrderSlot" condition="Skin.HasSetting(estuaryroquira_custom_widget_order_movies)"><param name="order_setting" value="estuaryroquira_widget_order_movies_6"/><param name="list_id" value="5760"/></include>
 						<include content="MovieWidgetOrderSlot" condition="Skin.HasSetting(estuaryroquira_custom_widget_order_movies)"><param name="order_setting" value="estuaryroquira_widget_order_movies_7"/><param name="list_id" value="5770"/></include>
+						<include content="MovieWidgetOrderSlot" condition="Skin.HasSetting(estuaryroquira_custom_widget_order_movies)"><param name="order_setting" value="estuaryroquira_widget_order_movies_8"/><param name="list_id" value="5780"/></include>
+						<include content="OrderedMovieCountries" condition="Skin.HasSetting(estuaryroquira_custom_widget_order_movies) + String.IsEmpty(Skin.String(estuaryroquira_widget_order_movies_8))"><param name="list_id" value="5781"/></include>
 						<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(estuaryroquira_custom_widget_order_movies) + !Skin.HasSetting(home_no_movies_categories_widget) + !Skin.HasSetting(estuaryroquira_playlists_ready)">
 							<param name="content_path" value="library://video/movies/"/>
 							<param name="additional_movie_items" value="true"/>
@@ -190,6 +192,16 @@
 							<param name="list_id" value="25500"/>
 							<param name="icon" value="$VAR[WidgetGenreIconVar]"/>
 							<param name="icon_height" value="70"/>
+						</include>
+						<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(estuaryroquira_custom_widget_order_movies) + !Skin.HasSetting(home_no_movies_countries_widget) + !Skin.HasSetting(estuaryroquira_playlists_ready)">
+							<param name="content_path" value="videodb://movies/countries/"/>
+							<param name="widget_header" value="$LOCALIZE[20451]"/>
+							<param name="widget_target" value="videos"/>
+							<param name="list_id" value="25700"/>
+							<param name="icon" value="$VAR[WidgetCountryIconVar]"/>
+							<param name="icon_height" value="70"/>
+							<param name="onclick_condition" value="true"/>
+							<param name="onclick_action" value="ActivateWindow(videos,$INFO[ListItem.FilenameAndPath],return)"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(estuaryroquira_custom_widget_order_movies) + !Skin.HasSetting(home_no_movies_sets_widget) + !Skin.HasSetting(estuaryroquira_playlists_ready)">
 							<param name="content_path" value="videodb://movies/sets/"/>
@@ -239,6 +251,16 @@
 							<param name="list_id" value="5500"/>
 							<param name="icon" value="$VAR[WidgetGenreIconVar]"/>
 							<param name="icon_height" value="70"/>
+						</include>
+						<include content="WidgetListCategories" condition="Library.HasContent(movies) + !Skin.HasSetting(estuaryroquira_custom_widget_order_movies) + !Skin.HasSetting(home_no_movies_countries_widget) + Skin.HasSetting(estuaryroquira_playlists_ready)">
+							<param name="content_path" value="plugin://skin.estuary.roquira/?mode=movie_countries"/>
+							<param name="widget_header" value="$LOCALIZE[20451]"/>
+							<param name="widget_target" value="videos"/>
+							<param name="list_id" value="5700"/>
+							<param name="icon" value="$VAR[WidgetCountryIconVar]"/>
+							<param name="icon_height" value="70"/>
+							<param name="onclick_condition" value="true"/>
+							<param name="onclick_action" value="ActivateWindow(videos,$INFO[ListItem.FilenameAndPath],return)"/>
 						</include>
 						<include content="WidgetListPoster" condition="Library.HasContent(movies) + !Skin.HasSetting(estuaryroquira_custom_widget_order_movies) + !Skin.HasSetting(home_no_movies_sets_widget) + Skin.HasSetting(estuaryroquira_playlists_ready)">
 							<param name="content_path" value="special://profile/addon_data/skin.estuary.roquira/playlists/main_movies_sets.xsp"/>
