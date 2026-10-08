@@ -20,7 +20,7 @@ DEFAULT_SHOW_SOURCE = "Anime Shows"
 INVALID_PATH = "special://profile/addon_data/skin.estuary.roquira/source-not-found/"
 READY_PROPERTY = "EstuaryRoquira.PlaylistsReady"
 READY_SKIN_SETTING = "estuaryroquira_playlists_ready"
-READY_MIGRATION_PROPERTY = "EstuaryRoquira.PersistentReadyMigration"
+READY_RELOAD_PROPERTY = "EstuaryRoquira.PlaylistsReadyReloaded"
 
 
 def _addon() -> xbmcaddon.Addon:
@@ -36,7 +36,7 @@ def _raw_setting(setting_id: str) -> str:
 
 
 def source_names_for_setting(setting_id: str, default: str) -> list[str]:
-    """Read both the old single-name format and the new JSON list format."""
+    """Read a plain source name, as in the setting default, or a JSON list of names."""
     raw = _raw_setting(setting_id)
     if not raw:
         return [default] if default else []
@@ -80,13 +80,13 @@ def set_playlists_ready(ready: bool) -> None:
         # A window property set later in startup is too late, leaving Anime
         # absent and Movies/TV Shows on their unfiltered fallback branches.
         # Persist readiness so subsequent boots select the filtered branches
-        # immediately. Reload once when migrating an existing installation.
+        # immediately, and reload once when the playlists first become ready.
         if not xbmc.getCondVisibility(f"Skin.HasSetting({READY_SKIN_SETTING})"):
-            reload_required = window.getProperty(READY_MIGRATION_PROPERTY) != "true"
-            window.setProperty(READY_MIGRATION_PROPERTY, "true")
+            reload_required = window.getProperty(READY_RELOAD_PROPERTY) != "true"
+            window.setProperty(READY_RELOAD_PROPERTY, "true")
             xbmc.executebuiltin(f"Skin.SetBool({READY_SKIN_SETTING})")
             if reload_required:
-                xbmc.log(f"[{ADDON_ID}] Migrating Home to persistent playlist readiness", xbmc.LOGINFO)
+                xbmc.log(f"[{ADDON_ID}] Reloading Home now that the playlists are ready", xbmc.LOGINFO)
                 xbmc.executebuiltin("ReloadSkin()")
     else:
         # Keep the persistent initialization marker on transient refresh
@@ -181,20 +181,21 @@ def generate_movie_country_playlists() -> list[tuple[str, str]]:
     return result
 
 
-def read_video_sources() -> dict[str, list[str]]:
+def _video_sources() -> list[tuple[str, list[str]]]:
+    """Return the name and paths of every configured Kodi video source with a path."""
     sources_file = Path(xbmcvfs.translatePath("special://profile/sources.xml"))
     if not sources_file.exists():
-        return {}
+        return []
     try:
         root = ET.parse(sources_file).getroot()
     except (ET.ParseError, OSError) as exc:
         xbmc.log(f"[{ADDON_ID}] Cannot parse sources.xml: {exc}", xbmc.LOGERROR)
-        return {}
+        return []
 
-    result: dict[str, list[str]] = {}
     video = root.find("video")
     if video is None:
-        return result
+        return []
+    result = []
     for source in video.findall("source"):
         name = (source.findtext("name") or "").strip()
         paths = [
@@ -203,33 +204,26 @@ def read_video_sources() -> dict[str, list[str]]:
             if (node.text or "").strip()
         ]
         if name and paths:
-            result.setdefault(name.casefold(), [])
-            for path in paths:
-                if path not in result[name.casefold()]:
-                    result[name.casefold()].append(path)
+            result.append((name, paths))
+    return result
+
+
+def read_video_sources() -> dict[str, list[str]]:
+    """Map case-folded video source names to their paths."""
+    result: dict[str, list[str]] = {}
+    for name, paths in _video_sources():
+        known = result.setdefault(name.casefold(), [])
+        for path in paths:
+            if path not in known:
+                known.append(path)
     return result
 
 
 def read_video_source_names() -> list[str]:
     """Return the display names of configured Kodi video sources."""
-    sources_file = Path(xbmcvfs.translatePath("special://profile/sources.xml"))
-    if not sources_file.exists():
-        return []
-    try:
-        root = ET.parse(sources_file).getroot()
-    except (ET.ParseError, OSError) as exc:
-        xbmc.log(f"[{ADDON_ID}] Cannot parse sources.xml: {exc}", xbmc.LOGERROR)
-        return []
-
-    video = root.find("video")
-    if video is None:
-        return []
     names: dict[str, str] = {}
-    for source in video.findall("source"):
-        name = (source.findtext("name") or "").strip()
-        has_path = any((node.text or "").strip() for node in source.findall("path"))
-        if name and has_path:
-            names.setdefault(name.casefold(), name)
+    for name, _paths in _video_sources():
+        names.setdefault(name.casefold(), name)
     return [names[key] for key in sorted(names)]
 
 
@@ -391,7 +385,6 @@ def write_playlist(
     _write_playlist_payload(directory / filename, payload)
 
 
-
 _REQUIRED_PLAYLISTS = (
     "anime_movies_titles.xsp",
     "anime_tvshows_titles.xsp",
@@ -407,6 +400,7 @@ _REQUIRED_PLAYLISTS = (
 def playlists_available() -> bool:
     directory = playlist_dir()
     return all((directory / filename).is_file() for filename in _REQUIRED_PLAYLISTS)
+
 
 def generate_playlists(notify: bool = False) -> dict[str, object]:
     movie_sources = source_names_for_setting("anime_movies_source", DEFAULT_MOVIE_SOURCE)
@@ -495,10 +489,6 @@ def generate_playlists(notify: bool = False) -> dict[str, object]:
                        exclude_paths=show_excludes, group=group)
 
     status = {
-        # Keep the singular keys for callers written against 4.1.7 while
-        # exposing the full selections for diagnostics.
-        "movie_source": ", ".join(movie_sources),
-        "show_source": ", ".join(show_sources),
         "movie_sources": movie_sources,
         "show_sources": show_sources,
         "movie_paths": movie_paths,
@@ -515,7 +505,6 @@ def generate_playlists(notify: bool = False) -> dict[str, object]:
         if not show_paths:
             missing.append(", ".join(show_sources) or "Anime Shows")
         if missing:
-            import xbmcgui
             xbmcgui.Dialog().notification(
                 "Estuary (roquira)",
                 "Source not found: " + ", ".join(missing),
@@ -523,6 +512,5 @@ def generate_playlists(notify: bool = False) -> dict[str, object]:
                 7000,
             )
         else:
-            import xbmcgui
             xbmcgui.Dialog().notification("Estuary (roquira)", "Anime filters regenerated", xbmcgui.NOTIFICATION_INFO, 4000)
     return status
