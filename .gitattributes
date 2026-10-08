@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+*.gif binary
+*.jpg binary
+*.png binary
+*.ttf binary
+*.xbt binary
+
+# Repository files that are not part of the add-on.
+/.gitattributes export-ignore
+/.github export-ignore
+/README.md export-ignore

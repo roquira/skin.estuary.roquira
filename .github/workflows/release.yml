@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*-roquira.*"
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Publish release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Check XML and Python
+        run: python3 .github/scripts/check.py
+
+      - name: Build add-on zip
+        id: build
+        run: echo "zip=$(.github/scripts/build-zip.sh dist "$GITHUB_REF_NAME")" >>"$GITHUB_OUTPUT"
+
+      - name: Write release notes
+        run: python3 .github/scripts/release-notes.py "$GITHUB_REF_NAME" >release-notes.md
+
+      - name: Attest add-on zip
+        uses: actions/attest@v4
+        with:
+          subject-path: ${{ steps.build.outputs.zip }}
+
+      - name: Assemble draft release
+        env:
+          ZIP: ${{ steps.build.outputs.zip }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "$ZIP" \
+            --draft --verify-tag --title "$GITHUB_REF_NAME" --notes-file release-notes.md
+
+      - name: Publish release
+        run: gh release edit "$GITHUB_REF_NAME" --draft=false
