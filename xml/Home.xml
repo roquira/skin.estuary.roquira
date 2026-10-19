@@ -2,6 +2,20 @@
 <window>
 	<defaultcontrol>9000</defaultcontrol>
 	<backgroundcolor>background</backgroundcolor>
+	<!-- Apply this skin's defaults once. Skin booleans start out false, so
+	     defaults that differ from Estuary's are set here; later changes stick. -->
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(show_weatherinfo)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(HomeMenuNoVideosButton)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(HomeMenuNoMusicButton)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(HomeMenuNoMusicVideoButton)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(HomeMenuNoPicturesButton)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(HomeMenuNoGamesButton)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(HomeMenuNoProgramsButton)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(HomeMenuNoFavButton)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(home_no_tvshows_recentlyaddedepisodes_widget)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(home_no_anime_episodes_recentlyadded_widget)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(hide_episode_ratings)</onload>
+	<onload condition="!Skin.HasSetting(estuaryroquira_defaults_applied)">Skin.SetBool(estuaryroquira_defaults_applied)</onload>
 	<onload>RunScript(special://skin/default.py,silent)</onload><controls>
 		<control type="button" id="20000">
 			<include>HiddenObject</include>
