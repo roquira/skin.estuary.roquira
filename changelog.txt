@@ -1,2 +1,8 @@
-4.1.0-roquira.1 (unreleased)
-- Fork of Estuary 4.1.0 from Kodi 22.
+4.1.0-roquira.1
+- First release, based on Estuary 4.1.0 from Kodi 22.
+- Anime home category, with anime kept out of Movies and TV Shows.
+- Countries row and country flags for movies.
+- Reorderable home widgets and more TV show widgets.
+- Option to hide episode ratings.
+- Library update and clean items in the power menu, with the roquira CoreELEC build.
+- Defaults to a shorter main menu and weather in the top bar, with episode ratings and the Recently Added Episodes widgets hidden.
